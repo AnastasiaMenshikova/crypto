@@ -1,5 +1,4 @@
 // Enigma1.cpp: определяет точку входа для консольного приложения.
-//
 
 #include "stdafx.h"
 #include <iostream>
@@ -17,17 +16,13 @@ int main()
 	{
 		Enigma machine = Enigma();
 		string plugz;
-		cout << "Enigma application" << endl;
-		cout << "Хотите узнать об энигме? Y/N" << endl;
-		getline(cin, input);
-		if (input == "Y" || input == "y" )
-			machine.about();
-		cout << "Введите 3 символа (пример: ABC) to set the rings." << endl;
+		cout << "Энигма" << endl;
+		cout << "Введите 3 символа (пример: ABC), чтобы установить значения для роторов(справа налево)." << endl;
 		getline(cin, plugz);
 		while (plugz.length() != 3)
 			getline(cin, plugz);
-		cout << "Нажмите 1 for full default machine settings." << endl;
-		cout << "Нажмите 2 for full random machine settings." << endl;
+		cout << "Нажмите 1 для полной настройки машины по умолчанию." << endl;
+		cout << "Нажмите 2 для случайной настройки машины." << endl;
 		getline(cin, input);
 		if (input == "1")
 		{
@@ -45,7 +40,7 @@ int main()
 		{
 			cout << "Введите E, чтобы зашифровать сообщение." << endl;
 			cout << "Введите V, чтобы посмотреть настройки ротора." << endl;
-			cout << "Введите P, чтобы посмотреть настройки плагборда" << endl;
+			cout << "Введите P, чтобы посмотреть настройки коммутационной панели" << endl;
 			cout << "Введите n, чтобы создать новую машину." << endl;
 			cout << "Введите q для завершения программы." << endl;
 			getline(cin, input);
@@ -56,7 +51,7 @@ int main()
 				getline(cin, msg);
 				string e = machine.Encrypt(msg);
 				cout << "Зашифрованное сообщение: " << e << endl;
-				cout << "Введите D to attempt to Decrypt your message. c to continue." << endl;
+				cout << "Введите D, чтобы попытаться расшифровать сообщение." << endl;
 				cout << "Введите P, чтобы посмотреть путь шифрования." << endl;
 				getline(cin, input);
 				if (input == "P" || input == "p")
@@ -82,7 +77,7 @@ int main()
 			else if (input == "P" || input == "p")
 				machine.printPlugBoard();
 			else if (input == "q" || input == "Q")
-				cout << "Bye" << endl;
+				cout << "Выход из приложения..." << endl;
 		}
 	}
 	return 0;
