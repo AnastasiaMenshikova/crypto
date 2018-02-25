@@ -7,9 +7,13 @@
 #include <algorithm>
 #include <vector>
 #include <ctype.h>
+// #include <iterator>
+
 using namespace std;
 
-//Base public contructor. This fills each rotator with the basic alphabet as well as a letters array with the alphabet. It will also create the reflector.
+//Base public contructor. 
+//This fills each rotator with the basic alphabet as well as a letters array with the alphabet. 
+//It will also create the reflector.
 
 Enigma::Enigma()
 {
@@ -49,7 +53,8 @@ void Enigma::printPlugBoard()
 	cout << endl;
 }
 
-//Funcitions to determine whether or not we're using the default rotaters/plugboards or not. setRings will use the user's ringsettings.
+//Funcitions to determine whether or not we're using the default rotaters/plugboards or not. 
+//setRings will use the user's ringsettings.
 //Inputs = user input deterimined in driver
 void Enigma::defaultRotors(bool input)
 {
@@ -68,7 +73,9 @@ void Enigma::setRings(string rings)
 	for (int i = 0; i<3; i++)
 		ringSettings[i] = rings[i];
 }
-//Function to create the rotors. If default rotors are not being used, the shuffle method will be called on each of the rotor vectors (which are currently just filled with the alphabet.)
+//Function to create the rotors. If default rotors are not being used, 
+//the shuffle method will be called on each of the rotor vectors 
+//(which are currently just filled with the alphabet.)
 //This means that each rotor will now consist of a scrambled alphabet to use as keys.
 void Enigma::createRotors()
 {
@@ -100,7 +107,8 @@ void Enigma::createRotors()
 	}
 }
 
-//Rings essentially are an extra layer of complexity to offset each rotor. After each rotor is created or scrambled, then they are offset based on the ringmod settings.
+//Rings essentially are an extra layer of complexity to offset each rotor. 
+//After each rotor is created or scrambled, then they are offset based on the ringmod settings.
 void Enigma::ringMod(int number, Rotor& r)
 {
 	int offset = ringSettings[number] - 65;
@@ -122,7 +130,10 @@ void Enigma::ringMod(int number, Rotor& r)
 	}
 }
 
-//The random plugboard is created by shuffling a vector of the alphabet. The first 20 letters of that shuffled vector are mapped to eachother, so we get 10 pairings. Those 10 pairings are then put into an array
+//The random plugboard is created by shuffling a vector of the alphabet. 
+//The first 20 letters of that shuffled vector are mapped to eachother, so we get 10 pairings. 
+//Those 10 pairings are then put into an array
+
 void Enigma::createplugBoard()
 {
 	if (defaultP == false)
@@ -159,7 +170,8 @@ void Enigma::createReflector()
 		reflector.cipher[i] = sreflector[i];
 }
 
-//Here we're putting the message into a linked list to be passed through the encryption machine. This lets us easily move through each character.
+//Here we're putting the message into a linked list to be passed through the encryption machine. 
+//This lets us easily move through each character.
 //The output will be a link list created in the class instance.
 void Enigma::segmentInput(string input)
 {
@@ -457,16 +469,4 @@ char Enigma::plug(char ch)
 			return plug[0];
 	}
 	return ch;
-}
-
-void Enigma::about()
-{
-	cout << "Энигма - это шифровальная машина, которую использовали немцы во Второй мировой войне." << endl;
-	cout << "Она состоит из нескольких основных компонентов: 3 ротора, 1 plugboard, and 1 reflector." << endl;
-	cout << "When you put in a character to the machine, it will pass through the 3 rotors. Each rotor changes the character based on a specific cipher that each rotor has." << endl;
-	cout << "The plugboard maps 10 characters to 10 other chaaracters, the character will be put through the plugboard at the beginning and ending of encryption/decryption." << endl;
-	cout << "Each rotor has a ringsetting, that will offset it for further complexity." << endl;
-	cout << "The reflector sends the character back through the machine after it has been through the first 3 rotors." << endl;
-	cout << "Once through the reflector, the character will be changed again to a unique different character. It will then go through the inverse of the 3 rotors." << endl;
-	cout << "Finally, you will have your encrypted character." << endl;
 }
