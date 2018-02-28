@@ -1,5 +1,3 @@
-// Enigma1.cpp: определяет точку входа для консольного приложения.
-
 #include "stdafx.h"
 #include <iostream>
 #include <string>
@@ -12,6 +10,11 @@ int main()
 
 	setlocale(LC_ALL, "Russian");
 	string input = "fdsf";
+	ifstream f;
+	ofstream f1;
+	string msg;
+	string e, d;
+
 	while (input != "q" || input != "Q")
 	{
 		Enigma machine = Enigma();
@@ -47,12 +50,15 @@ int main()
 			if (input == "E" || input == "e")
 			{
 				cout << "Введите сообщение: " << endl;
-				string msg;
+				
 				getline(cin, msg);
-				string e = machine.Encrypt(msg);
+				e = machine.Encrypt(msg);
 				cout << "Зашифрованное сообщение: " << e << endl;
 				cout << "Введите D, чтобы попытаться расшифровать сообщение." << endl;
 				cout << "Введите P, чтобы посмотреть путь шифрования." << endl;
+				cout << "Введите W, чтобы записать в файл." << endl;
+				cout << "Введите R, чтобы считать из файла." << endl;
+	
 				getline(cin, input);
 				if (input == "P" || input == "p")
 					machine.printEncrypt();
@@ -76,6 +82,65 @@ int main()
 				machine.printRotorSettings();
 			else if (input == "P" || input == "p")
 				machine.printPlugBoard();
+
+			else if (input == "w" || input == "W")
+			{
+				cout << "Введите имя файла\n";
+				char name_file[30];
+				cin >> name_file;
+				f.open(name_file, ios::in);
+				if (!f.is_open())
+				{
+					cout << "Ошибка!Такого файла не существует, создайте или введите другое название" << endl << endl;
+					system("pause");
+					cin.clear();
+					cin.ignore();
+					system("cls");
+					break;
+				}
+
+				while (!f.eof()) {
+					f >> msg;
+				}
+
+				f.close();
+				cout << "Элементы были считаны из файла" << endl << endl;
+				system("pause");
+				cin.clear();
+				cin.ignore();
+				system("cls");
+				break;
+
+			}
+
+			else if (input == "r" || input == "R")
+			{
+				cout << "Введите имя файла\n";
+				char name_file[30];
+				cin >> name_file;
+				f.open(name_file, ios::in);
+				if (!f.is_open())
+				{
+					cout << "Ошибка!Такого файла не существует, создайте или введите другое название" << endl << endl;
+					system("pause");
+					cin.clear();
+					cin.ignore();
+					system("cls");
+					break;
+				}
+				while (!f.eof()) {
+					f >> msg;
+				}
+				f.close();
+				cout << "Элементы были считаны из файла" << endl << endl;
+				system("pause");
+				cin.clear();
+				cin.ignore();
+				system("cls");
+				break;
+			}
+
+
 			else if (input == "q" || input == "Q")
 				cout << "Выход из приложения..." << endl;
 		}
