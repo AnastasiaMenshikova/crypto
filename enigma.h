@@ -2,6 +2,8 @@
 #define ENIGMA_H
 #include <iostream>
 #include <vector>
+using namespace std;
+
 struct node
 {
 	char val;
@@ -18,17 +20,16 @@ class Enigma
 {
 public:
 	Enigma();
-	void setRings(std::string);
+	void setRings(string);
 	void defaultRotors(bool);
-	std::string Encrypt(std::string);
-	std::string Decrypt(std::string);
-	std::string DecryptH(std::string);
+	string Encrypt(string);
+	string Decrypt(string);
+	string DecryptH(string);
 	void printEncrypt();
 	void printDecrypt();
 	void printRotorSettings();
 	void printPlugBoard();
 	void defaultPlugs(bool);
-	void about();
 private:
 	void createRotors();
 	void ringMod(int, Rotor&);
