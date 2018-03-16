@@ -124,9 +124,9 @@ int main()
 					system("cls");
 					break;
 				}
-
-				else if (input == "r" || input == "R")
-				{
+			}
+			else if (input == "r" || input == "R")
+			{
 					cout << "Введите имя файла\n";
 					char name_file[30];
 					cin >> name_file;
@@ -150,15 +150,15 @@ int main()
 					cin.ignore();
 					system("cls");
 					break;
-				}
+			}
 
 
-				else if (input == "q" || input == "Q")
-				{
+			else if (input == "q" || input == "Q")
+			{
 					cout << "Выход из приложения..." << endl;
 					break;
-				}
 			}
+			
 		}
 	}
 	return 0;
