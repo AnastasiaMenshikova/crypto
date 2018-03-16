@@ -1,0 +1,141 @@
+/*
+	BLOWFISH bf("FEDCBA9876543210");
+	string asdf = "BlowwFIshhhhhhhhhhh!";
+	asdf = bf.Encrypt_CBC(asdf);
+	cout << "Encrypted: " << asdf << endl;
+	asdf = bf.Decrypt_CBC(asdf);
+	cout << "Decrypted: " << asdf;
+*/ 
+
+
+#include "stdafx.h"
+#include <iostream> 
+#include <conio.h> 
+#include <cstring> 
+#include <locale.h> 
+#include <string.h> 
+#include <string> 
+#include <fstream> 
+#include "blowfish.h"
+using namespace std;
+typedef unsigned char byte;
+int main()
+{
+	ifstream f;
+	ofstream f1;
+	int mn;
+	int c;
+	int m;
+	int n;
+	setlocale(LC_ALL, "Russian");
+
+	
+	string msg;
+	string key;
+	cout << "Введите ключ (минимум 16 символов):" << endl;
+	cin >> key;
+	BLOWFISH bf(key);
+
+	do
+	{
+		cout << "Blowfish" << endl;
+		cout << "Выберите пункт меню:" << endl;
+		cout << "1)Зашифровать сообщение" << endl;
+		cout << "2)Расшифровать сообщение" << endl;
+		//cout << "3)Открыть файл" << endl;
+		//cout << "4)Записать в файл" << endl;
+
+		cout << "Нажмите 0 для выхода из программы" << endl << endl;
+		cin>> mn;
+
+		if (mn == 1)
+
+		{
+			cout << "Введите текст:" << endl;
+			cin >> msg;
+			msg = bf.Encrypt_CBC(msg);
+			cout << "Зашифрованный текст: " << msg << endl;
+			system("pause");
+			cin.clear();
+			cin.ignore();
+			system("cls");
+		}
+		if (mn == 2)
+		{
+			cout << "Введите текст:" << endl;
+			cin >> msg;
+			msg = bf.Decrypt_CBC(msg);
+			cout << "Расшифрованное сообщение: " << msg;
+		}
+		/*if (mn == 3)
+		{
+			cout << "Введите имя файла\n";
+			char name_file[30];
+			cin >> name_file;
+			f.open(name_file, ios::in);
+			if (!f.is_open())
+			{
+				cout << "Ошибка!Такого файла не существует, создайте или введите другое название" << endl << endl;
+				system("pause");
+				cin.clear();
+				cin.ignore();
+				system("cls");
+				break;
+			}
+
+			msg[0] = 0;
+			while (!f.eof()) {
+				f >> msg;
+			}
+			f.close();
+			cout <<"Элементы были считаны из файла" << endl << endl;
+			system("pause");
+			cin.clear();
+			cin.ignore();
+			system("cls");
+
+		}
+
+		if (mn == 4)
+		{
+			cout << "Введите имя файла\n";
+			char name_file1[30];
+			cin >> name_file1;
+			f1.open(name_file1, ios::out | ios::trunc);
+			if (!f1.is_open())
+			{
+				cout << "Ошибка при открытии файла" << endl << endl;
+				system("pause");
+				cin.clear();
+				cin.ignore();
+				system("cls");
+				break;
+			}
+
+			f1 << msg;
+
+			cout << "Элементы были добавлены в файл " << name_file1 << endl << endl;
+			system("pause");
+			cin.clear();
+			cin.ignore();
+			system("cls");
+			f1.close();
+
+
+		}*/
+
+
+		if (mn < 0 || mn>2)
+		{
+			cout << "Ошибка! Необходимо ввести число от 1 до 2 или 0 для выхода." << endl << endl;
+			system("pause");
+			cin.clear();
+			cin.ignore();
+			system("cls");
+		}
+	} while (mn != 0);
+
+
+	system("pause");
+	return 0;
+}
