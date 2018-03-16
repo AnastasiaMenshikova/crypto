@@ -125,40 +125,42 @@ int main()
 					break;
 				}
 
-			else if (input == "r" || input == "R")
-			{
-				cout << "Введите имя файла\n";
-				char name_file[30];
-				cin >> name_file;
-				f.open(name_file, ios::in);
-				if (!f.is_open())
+				else if (input == "r" || input == "R")
 				{
-					cout << "Ошибка!Такого файла не существует, создайте или введите другое название" << endl << endl;
+					cout << "Введите имя файла\n";
+					char name_file[30];
+					cin >> name_file;
+					f.open(name_file, ios::in);
+					if (!f.is_open())
+					{
+						cout << "Ошибка!Такого файла не существует, создайте или введите другое название" << endl << endl;
+						system("pause");
+						cin.clear();
+						cin.ignore();
+						system("cls");
+						break;
+					}
+					while (!f.eof()) {
+						f >> msg;
+					}
+					f.close();
+					cout << "Элементы были считаны из файла" << endl << endl;
 					system("pause");
 					cin.clear();
 					cin.ignore();
 					system("cls");
 					break;
 				}
-				while (!f.eof()) {
-					f >> msg;
+
+
+				else if (input == "q" || input == "Q")
+				{
+					cout << "Выход из приложения..." << endl;
+					break;
 				}
-				f.close();
-				cout << "Элементы были считаны из файла" << endl << endl;
-				system("pause");
-				cin.clear();
-				cin.ignore();
-				system("cls");
-				break;
-			}
-
-
-			else if (input == "q" || input == "Q") 
-			{
-				cout << "Выход из приложения..." << endl;
-				break;
 			}
 		}
 	}
 	return 0;
+	
 }
