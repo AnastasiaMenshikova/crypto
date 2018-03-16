@@ -17,7 +17,6 @@ int main()
 
 	while (input != "q" || input != "Q")
 	{
-		int mn;
 		Enigma machine = Enigma();
 		string plugz;
 		cout << "Энигма" << endl;
@@ -34,10 +33,6 @@ int main()
 			machine.defaultPlugs(true);
 			machine.defaultRotors(true);
 			cout << "Настройки завершены." << endl;
-			system("pause");
-			cin.clear();
-			cin.ignore();
-			system("cls");
 		}
 		else if (input == "2")
 		{
@@ -45,11 +40,12 @@ int main()
 			machine.defaultPlugs(false);
 			machine.defaultRotors(false);
 			cout << "Настройки завершены." << endl;
-			system("pause");
-			cin.clear();
-			cin.ignore();
-			system("cls");
 		}
+		system("pause");
+		cin.clear();
+		cin.ignore();
+		system("cls");
+
 		while (input != "n" && input != "q")
 		{
 			cout << "Введите E, чтобы зашифровать сообщение." << endl;
@@ -88,26 +84,14 @@ int main()
 					if (input == "P" || input == "p")
 						machine.printDecrypt();
 				}
-				system("pause");
-				cin.clear();
-				cin.ignore();
-				system("cls");
 			}
 			else if (input == "V" || input == "v")
 			{
 				machine.printRotorSettings();
-				system("pause");
-				cin.clear();
-				cin.ignore();
-				system("cls");
 			}
 			else if (input == "P" || input == "p")
 			{
 				machine.printPlugBoard();
-				system("pause");
-				cin.clear();
-				cin.ignore();
-				system("cls");
 			}
 			else if (input == "w" || input == "W")
 			{
@@ -118,7 +102,6 @@ int main()
 				if (!f1.is_open())
 				{
 					cout << "Ошибка при открытии файла" << endl << endl;
-					system("pause");
 					cin.clear();
 					cin.ignore();
 					system("cls");
@@ -127,40 +110,39 @@ int main()
 			}
 			else if (input == "r" || input == "R")
 			{
-					cout << "Введите имя файла\n";
-					char name_file[30];
-					cin >> name_file;
-					f.open(name_file, ios::in);
-					if (!f.is_open())
-					{
-						cout << "Ошибка!Такого файла не существует, создайте или введите другое название" << endl << endl;
-						system("pause");
-						cin.clear();
-						cin.ignore();
-						system("cls");
-						break;
-					}
-					while (!f.eof()) {
-						f >> msg;
-					}
-					f.close();
-					cout << "Элементы были считаны из файла" << endl << endl;
+				cout << "Введите имя файла\n";
+				char name_file[30];
+				cin >> name_file;
+				f.open(name_file, ios::in);
+				if (!f.is_open())
+				{
+					cout << "Ошибка!Такого файла не существует, создайте или введите другое название" << endl << endl;
 					system("pause");
 					cin.clear();
 					cin.ignore();
 					system("cls");
 					break;
+				}
+				while (!f.eof()) {
+					f >> msg;
+				}
+				f.close();
+				cout << "Элементы были считаны из файла" << endl << endl;
+				system("pause");
+				cin.clear();
+				cin.ignore();
+				system("cls");
 			}
 
 
 			else if (input == "q" || input == "Q")
 			{
-					cout << "Выход из приложения..." << endl;
-					break;
+				cout << "Выход из приложения..." << endl;
+				break;
 			}
-			
+
 		}
 	}
 	return 0;
-	
+
 }
