@@ -27,7 +27,6 @@ run it through a hash algorithm such as SHA-256
 
 #ifndef BLOWFISH_INCLUDED
 #define BLOWFISH_INCLUDED
-
 #include <string>
 #ifdef _WIN32
 #include <Windows.h>
@@ -35,37 +34,27 @@ run it through a hash algorithm such as SHA-256
 #else
 #include <fstream> 
 #endif
-
 using namespace std;
 typedef unsigned char byte;
-
 class BLOWFISH {
-
-	//Although there is no successful cryptanalysis of the 16 round version, a higher number of rounds generally means more security.
-	//STANDARD: 16
-	//MAXIMUM: 256
-	//**MUST be an EVEN number**
-#define ROUNDS 16
+// Несмотря на отсутствие успешного криптоанализа 16-раундовой версии, большее количество раундов обычно означает большую безопасность.
+#define ROUNDS 16 //можно увеличить до 256 раундов
 public:
 	BLOWFISH(std::string hexKey);
 	BLOWFISH(byte* cipherKey, int keylength);
-
 	//TODO: string encryption functions -> base64
-	std::string Encrypt_CBC(std::string data);
+	string Encrypt_CBC(string data);
 	byte* Encrypt_CBC(byte* data, int length, int* newlength);
 	byte* Encrypt_ECB(byte* data, int length, int* newlength);
 	void Encrypt_Block(byte* block, int offset = 0);
-
-	std::string Decrypt_CBC(std::string data);
+	string Decrypt_CBC(std::string data);
 	byte* Decrypt_CBC(byte* data, int length, int* newlength);
 	byte* Decrypt_ECB(byte* data, int length, int* newlength);
 	void Decrypt_Block(byte* block, int offset = 0);
-
 	void SetRandomIV();
 	void SetIV(byte* newIV);
 	byte* GetIV();
 	bool IvSet;
-
 protected:
 	void SetupKey(byte* cipherKey, int length);
 	void encipher();
@@ -78,12 +67,9 @@ protected:
 	static unsigned int s1[];
 	static unsigned int s2[];
 	static unsigned int s3[];
-
 	unsigned int xl_par;
 	unsigned int xr_par;
-
 	byte IV[8];
-
 	byte* Crypt_ECB(byte* data, int length, int* newlength, void (BLOWFISH::*CryptBlock)(byte*, int offset), bool decrypt);
 	byte* Crypt_CBC(byte* data, int length, int* newlength, void (BLOWFISH::*CryptBlock)(byte*, int offset), bool decrypt);
 	byte* padData(byte* data, int length, int* paddedLength, bool decrypt, bool IvSpace);
